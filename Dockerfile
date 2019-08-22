@@ -1,5 +1,5 @@
 FROM ubuntu:bionic
-
+COPY sources.list /etc/apt/sources.list
 RUN apt update && apt install -y curl unzip build-essential docker.io locales python3-pip && \
     apt clean
 
@@ -13,6 +13,8 @@ RUN pip3 install awscli --upgrade --user
 RUN . ~/.profile && brew tap aws/tap && \
     brew install aws-sam-cli
 
-ENV PATH="/home/sam/.local/bin:/home/sam/.linuxbrew/:${PATH}"
+ENV PATH="/home/sam/.local/bin:/home/sam/.linuxbrew/bin:${PATH}"
+
+EXPOSE 3001
 
 ENTRYPOINT ["sam"]
