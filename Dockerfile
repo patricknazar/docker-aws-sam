@@ -13,6 +13,10 @@ RUN pip3 install awscli --upgrade --user
 RUN . ~/.profile && brew tap aws/tap && \
     brew install aws-sam-cli
 
+USER root
+RUN groupmod -g 1001 docker
+USER sam
+
 ENV PATH="/home/sam/.local/bin:/home/sam/.linuxbrew/bin:${PATH}"
 
 EXPOSE 3001
